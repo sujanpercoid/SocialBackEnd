@@ -14,6 +14,7 @@ namespace TClone.Data
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Bookmark> Bookmarks { get; set; }
+        public DbSet<Like> Likes { get; set; }
 
        
     }

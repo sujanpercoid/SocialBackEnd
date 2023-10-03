@@ -11,6 +11,8 @@ namespace TClone.AutoMapper
                 .ForMember(dest => dest.PasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.PasswordSalt, opt => opt.Ignore());
             CreateMap<User, UserDto>();
+            CreateMap<Profile, ProfileDto>();
+            CreateMap<ProfileDto,Profile>();
 
         }
     }

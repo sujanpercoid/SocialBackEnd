@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TClone.Data;
 
@@ -11,9 +12,11 @@ using TClone.Data;
 namespace TClone.Migrations
 {
     [DbContext(typeof(TcDbcontext))]
-    partial class TcDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20231002104104_likeeee")]
+    partial class likeeee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,26 +64,6 @@ namespace TClone.Migrations
                     b.HasKey("FollowId");
 
                     b.ToTable("Follows");
-                });
-
-            modelBuilder.Entity("TClone.Models.Like", b =>
-                {
-                    b.Property<int>("LikeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LikeId"));
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("LikeId");
-
-                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("TClone.Models.Notification", b =>

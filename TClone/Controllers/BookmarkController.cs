@@ -54,5 +54,27 @@ namespace TClone.Controllers
             return Ok(bookmark);
         }
 
+        //Get Like Data 
+        [HttpPost("like")]
+        public async Task<IActionResult>Like([FromBody]Like like)
+        {
+            var likes = await _book.PostLike(like);
+            return Ok(like);
+        }
+        //Remove Likes
+        [HttpDelete("removelike")]
+        public async Task <IActionResult> RemoveLike([FromQuery] string username , [FromQuery] int postId)
+        {
+            var rlike = await _book.RemoveLike(username,postId);
+            return Ok(rlike);
+        }
+        //Get All Likes
+        [HttpGet("getLikes/{id}")]
+        public async Task <IActionResult> GetLikes ([FromRoute] string id)
+        {
+            var llike = await _book.GetLike(id);
+            return Ok(llike);
+        }
+
     }
 }

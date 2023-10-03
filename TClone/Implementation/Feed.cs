@@ -35,11 +35,12 @@ namespace TClone.Services
             return "Post Added";
         }
         //get all post for home
-        public async Task <List<Posts>> Get (string id )
+        public async Task <List<PostDto>> Get (string id )
         {
             using var connection = CreateConnection();
-            var sqlQuery = @"SELECT P.*
-                             FROM Posts P
+            var sqlQuery = @"SELECT Distinct p.*, (SELECT COUNT(*) FROM likes l WHERE l.PostId = p.PostId) AS TotalLikes
+                             FROM posts p
+                             LEFT JOIN likes l ON l.PostId = p.PostId
                              WHERE P.[View] = 'public'
                              OR (P.[View] = 'follower' AND EXISTS (
                              SELECT 1
@@ -47,23 +48,24 @@ namespace TClone.Services
                              WHERE F.Username = @username
                              AND F.Follows = P.Username
                                ))
-                             order by PostId desc; ";
+                             order by p.PostId desc; ";
             var parameter = new { username = id };
-            var info = await connection.QueryAsync<Posts>(sqlQuery, parameter);
+            var info = await connection.QueryAsync<PostDto>(sqlQuery, parameter);
             return info.ToList();
         }
 
         //get post for following only
-        public async Task<List<Posts>> followingPost(string id)
+        public async Task<List<PostDto>> followingPost(string id)
         {
             using var connection = CreateConnection();
-            var sqlQuery = @"SELECT p.*
+            var sqlQuery = @"SELECT  Distinct p.*,(SELECT COUNT(*) FROM likes l WHERE l.PostId = p.PostId) AS TotalLikes
                           FROM posts p
                          JOIN follows f ON p.username = f.follows
+						 left join likes l on l.PostId = p.PostId
                              WHERE f.username = @username
                            ORDER BY p.postid DESC;";
             var parameter = new { username = id };
-            var info = await connection.QueryAsync<Posts>(sqlQuery, parameter);
+            var info = await connection.QueryAsync<PostDto>(sqlQuery, parameter);
             return info.ToList();
         }
 

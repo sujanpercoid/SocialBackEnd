@@ -5,8 +5,8 @@ namespace TClone.Services
     public interface IFeed
     {
         Task<string> Post(Posts req);
-        Task<List<Posts>> Get(string id);
-        Task<List<Posts>> followingPost(string id);
+        Task<List<PostDto>> Get(string id);
+        Task<List<PostDto>> followingPost(string id);
         Task<string> Follow (Follow req);
         Task<IEnumerable<ProfileNameDto>> Profile(string id);
         Task<List<FollowerDto>> Follower(string id);

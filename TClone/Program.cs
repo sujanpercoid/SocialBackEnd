@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TClone.Data;
+using TClone.Implementation;
 using TClone.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddScoped<IAuth, Auth>();
 builder.Services.AddScoped<IFeed, Feed>();
 builder.Services.AddScoped<INotification,Noti>();
 builder.Services.AddScoped<IBookmark,Bookmarkss>();
+builder.Services.AddScoped<IProfile,Profile>();
 
 var app = builder.Build();
 

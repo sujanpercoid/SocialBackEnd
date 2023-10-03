@@ -69,5 +69,39 @@ namespace TClone.Services
             return info.ToList();
 
         }
+        //Post Like Info 
+        public async Task<string>PostLike(Like like)
+        {
+            var follow = await _book.Likes.AddAsync(like);
+            await _book.SaveChangesAsync();
+            var resultMessage = new { message = " Like Added !!" };
+            return (JsonConvert.SerializeObject(resultMessage));
+
+        }
+        //Remove Like Info
+        public async Task<string>RemoveLike (string username, int postId)
+        {
+            
+            using var connection = CreateConnection();
+            var sqlQuery = @"delete from likes
+                         where username =@username
+                         and PostId = @id;";
+            var parameter = new { username = username,id = postId };
+            var info = await connection.QueryAsync<Like>(sqlQuery, parameter);
+            var resultMessage = new { message = " Like Removed !!" };
+            return (JsonConvert.SerializeObject(resultMessage));
+        }
+        //Get All Like Data
+        public async Task<List<Like>> GetLike(string id)
+        {
+            using var connection = CreateConnection();
+            var sqlQuery = @"select *
+                             from likes
+                              where username = @username ;";
+            var parameter = new { username = id };
+            var info = await connection.QueryAsync<Like>(sqlQuery,parameter);
+            return info.ToList();
+
+        }
     }
 }

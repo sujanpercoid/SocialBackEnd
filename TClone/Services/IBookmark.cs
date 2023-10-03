@@ -8,5 +8,8 @@ namespace TClone.Services
         Task<List<BookmarkDto>> GetBookmarks(string id);
         Task<string> DeletSBookmark(int id);
         Task<List<Bookmark>> GetBookmarkid(string id);
+        Task<string> PostLike(Like like);
+        Task<string> RemoveLike(string username,int postId);
+        Task<List<Like>> GetLike(string id);
     }
 }
