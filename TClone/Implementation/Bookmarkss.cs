@@ -70,14 +70,56 @@ namespace TClone.Services
 
         }
         //Post Like Info 
-        public async Task<string>PostLike(Like like)
-        {
-            var follow = await _book.Likes.AddAsync(like);
-            await _book.SaveChangesAsync();
-            var resultMessage = new { message = " Like Added !!" };
-            return (JsonConvert.SerializeObject(resultMessage));
+        //public async Task<string>PostLike(Like like)
+        //{
+        //    var follow = await _book.Likes.AddAsync(like);
+        //    await _book.SaveChangesAsync();
+        //    var resultMessage = new { message = " Like Added !!" };
+        //    return (JsonConvert.SerializeObject(resultMessage));
 
+        //}
+        public async Task<string> PostLike(Like like)
+        {
+            try
+            {
+                using var connection = CreateConnection();
+                connection.Open();
+
+                // Step 1: Add a "like" to the database
+                var follow = await connection.ExecuteAsync("INSERT INTO Likes (username, PostId) VALUES (@username, @PostId)", like);
+
+                // Step 2: Retrieve the latest like information
+                var latestLikeInfo = await connection.QueryFirstOrDefaultAsync<LikerInfo>(
+                    "SELECT TOP 1 l.username AS PostLiker, p.username AS Poster " +
+                    "FROM Likes l " +
+                    "LEFT JOIN Posts p ON p.PostId = l.PostId " +
+                    "ORDER BY l.likeid DESC");
+
+                // Step 3: Insert a notification
+                await connection.ExecuteAsync(
+                    "INSERT INTO Notifications (Username, Messgae) " +
+                    "VALUES (@Username, @Messgae)",
+                    new { Username = latestLikeInfo.Poster, Messgae = latestLikeInfo.PostLiker + " liked Your Post" });
+
+                // Optionally, you can return a success message as JSON
+                var resultMessage = new { message = "Like Added !!" };
+                return JsonConvert.SerializeObject(resultMessage);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Console.WriteLine("An error occurred: " + ex.Message);
+                // You can return an error message as JSON or throw an exception as needed.
+                var errorMessage = new { error = "An error occurred while adding the like." };
+                return JsonConvert.SerializeObject(errorMessage);
+            }
         }
+
+
+
+
+
+
         //Remove Like Info
         public async Task<string>RemoveLike (string username, int postId)
         {
@@ -103,5 +145,18 @@ namespace TClone.Services
             return info.ToList();
 
         }
+        //Get All Like Username
+        public async Task<List<Like>>GetUsername(int id)
+        {
+            using var connection = CreateConnection();
+            var sqlQuery = @"
+                            select username
+                            from Likes
+                            where PostId =@id;";
+            var parameter = new { id = id };
+            var info = await connection.QueryAsync<Like>(sqlQuery, parameter);
+            return info.ToList();
+        }
+        
     }
 }

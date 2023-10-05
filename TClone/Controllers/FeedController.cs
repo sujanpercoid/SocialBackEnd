@@ -94,7 +94,48 @@ namespace TClone.Data
             var posts = await _feed.ProfilePosts(poster, viewer);
             return Ok(posts);
         }
+        //Get Post for profile 
+        [HttpGet("PostForLikes")]
+        public async Task<IActionResult> PostForLikes([FromQuery] string poster, [FromQuery] string viewer)
+        {
+            var posts = await _feed.GetPostForLikes(poster, viewer);
+            return Ok(posts);
+        }
 
-
+        //Get all my posts
+        [HttpGet("GetMyPosts/{id}")]
+        public async Task <IActionResult>GetMyPosts([FromRoute] string id)
+        {
+            var myposts = await _feed.MyPosts(id);
+            return Ok(myposts);
+        }
+        //Get all my likes
+        [HttpGet("mylikes/{id}")]
+        public async Task<IActionResult>MyLikes([FromRoute] string id)
+        {
+            var mylikes = await _feed.MyLikedPosts(id);
+            return Ok(mylikes);
+        }
+        //Get post for edit
+        [HttpGet("postedit/{id}")]
+        public async Task<IActionResult> EditPost([FromRoute] int id)
+        {
+            var post = await _feed.EditPosts(id);
+            return Ok(post);
+        }
+        //Update Posts
+        [HttpPut("updatepost/{id}")]
+        public async Task<IActionResult>UpdatePost([FromRoute] int id ,[FromBody]Posts post)
+        {
+            var update = await _feed.UpdatedPost(id, post);
+            return Ok(update);
+        }
+        //Delete Post 
+        [HttpDelete("deletepost/{id}")]
+        public async Task<IActionResult>DeletePost([FromRoute] int id)
+        {
+            var deletepost = await _feed.DeletePost(id);    
+            return Ok(deletepost);
+        }
     }
 }

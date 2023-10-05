@@ -11,5 +11,6 @@ namespace TClone.Services
         Task<string> PostLike(Like like);
         Task<string> RemoveLike(string username,int postId);
         Task<List<Like>> GetLike(string id);
+        Task<List<Like>> GetUsername(int id);
     }
 }

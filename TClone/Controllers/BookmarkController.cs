@@ -70,10 +70,17 @@ namespace TClone.Controllers
         }
         //Get All Likes
         [HttpGet("getLikes/{id}")]
-        public async Task <IActionResult> GetLikes ([FromRoute] string id)
+        public async Task<IActionResult> GetLikes([FromRoute] string id)
         {
             var llike = await _book.GetLike(id);
             return Ok(llike);
+        }
+        //Get all like username
+        [HttpGet("likeuser/{id}")]
+        public async Task<IActionResult> Getuser([FromRoute]int id)
+        {
+            var user = await _book.GetUsername(id);
+            return Ok(user);
         }
 
     }
