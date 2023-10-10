@@ -77,7 +77,9 @@ namespace TClone.Services
         //    var resultMessage = new { message = " Like Added !!" };
         //    return (JsonConvert.SerializeObject(resultMessage));
 
-        //}
+        //}  
+
+        //Post Like Info 
         public async Task<string> PostLike(Like like)
         {
             try
