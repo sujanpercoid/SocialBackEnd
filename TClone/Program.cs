@@ -22,9 +22,9 @@ builder.Services.AddScoped<IFeed, Feed>();
 builder.Services.AddScoped<INotification,Noti>();
 builder.Services.AddScoped<IBookmark,Bookmarkss>();
 builder.Services.AddScoped<IProfile,Profile>();
-builder.Services.AddTransient<IGenericRepository<Posts>, GenericRepository<Posts>>();
-builder.Services.AddTransient<IGenericRepository<Bookmark>, GenericRepository<Bookmark>>();
-builder.Services.AddTransient<IGenericRepository<Follow>, GenericRepository<Follow>>();
+//Repository For all
+builder.Services.AddTransient(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+
 
 
 var app = builder.Build();
