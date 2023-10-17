@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using TClone.Data;
 using TClone.Implementation;
+using TClone.Models;
+using TClone.RepoImplementation;
+using TClone.Repository;
 using TClone.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +22,10 @@ builder.Services.AddScoped<IFeed, Feed>();
 builder.Services.AddScoped<INotification,Noti>();
 builder.Services.AddScoped<IBookmark,Bookmarkss>();
 builder.Services.AddScoped<IProfile,Profile>();
+builder.Services.AddTransient<IGenericRepository<Posts>, GenericRepository<Posts>>();
+builder.Services.AddTransient<IGenericRepository<Bookmark>, GenericRepository<Bookmark>>();
+builder.Services.AddTransient<IGenericRepository<Follow>, GenericRepository<Follow>>();
+
 
 var app = builder.Build();
 

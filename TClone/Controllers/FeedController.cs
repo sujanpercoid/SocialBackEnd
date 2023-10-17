@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TClone.Models;
+using TClone.Repository;
 using TClone.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,13 +16,17 @@ namespace TClone.Data
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
         private readonly IFeed _feed;
+        private readonly IGenericRepository<Posts> _feedrepo;
+       
 
-        public FeedController(TcDbcontext login, IMapper mapper, IWebHostEnvironment environment,IFeed feed)
+        public FeedController(TcDbcontext login, IMapper mapper, IWebHostEnvironment environment,IFeed feed,IGenericRepository<Posts> feedrepo)
         {
             _login = login;
             _mapper = mapper;
             _environment = environment;
             _feed = feed;
+            _feedrepo = feedrepo;
+            
         }
 
          // Add Posts 
@@ -132,10 +137,17 @@ namespace TClone.Data
         }
         //Delete Post 
         [HttpDelete("deletepost/{id}")]
-        public async Task<IActionResult>DeletePost([FromRoute] int id)
+        //public async Task<IActionResult>DeletePost([FromRoute] int id)
+        //{
+        //    var deletepost = await _feed.DeletePost(id);    
+        //    return Ok(deletepost);
+        //}
+        public async Task<IActionResult> DeletePost([FromRoute] int id)
         {
-            var deletepost = await _feed.DeletePost(id);    
-            return Ok(deletepost);
+            string result = await _feed.Delete(id);
+            return Ok(result);
         }
+
+
     }
 }

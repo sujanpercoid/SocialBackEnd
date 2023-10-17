@@ -5,17 +5,18 @@ using Newtonsoft.Json;
 using System.Data.SqlClient;
 using TClone.Data;
 using TClone.Models;
+using TClone.RepoImplementation;
 
 namespace TClone.Services
 {
-    public class Noti : INotification
+    public class Noti : GenericRepository<Notification> ,INotification
     {
         private readonly TcDbcontext _noti;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _config;
 
-        public Noti(TcDbcontext noti, IMapper mapper, IWebHostEnvironment environment, IConfiguration config)
+        public Noti(TcDbcontext noti, IMapper mapper, IWebHostEnvironment environment, IConfiguration config) : base(noti)
         {
             _noti = noti;
             _mapper = mapper;

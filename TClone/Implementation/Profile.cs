@@ -5,18 +5,19 @@ using Newtonsoft.Json;
 using System.Data.SqlClient;
 using TClone.Data;
 using TClone.Models;
+using TClone.RepoImplementation;
 using TClone.Services;
 
 namespace TClone.Implementation
 {
-    public class Profile: IProfile
+    public class Profile:  IProfile
     {
         private readonly TcDbcontext _pro;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _config;
 
-        public Profile(TcDbcontext pro,IMapper mapper, IWebHostEnvironment environment, IConfiguration config)
+        public Profile(TcDbcontext pro,IMapper mapper, IWebHostEnvironment environment, IConfiguration config) 
         {
            _pro = pro;
             _mapper = mapper;

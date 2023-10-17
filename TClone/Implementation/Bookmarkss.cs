@@ -4,22 +4,26 @@ using Newtonsoft.Json;
 using System.Data.SqlClient;
 using TClone.Data;
 using TClone.Models;
+using TClone.RepoImplementation;
+using TClone.Repository;
 
 namespace TClone.Services
 {
-    public class Bookmarkss: IBookmark
+    public class Bookmarkss:  IBookmark
     {
         private readonly TcDbcontext _book;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _config;
+        private readonly IGenericRepository<Bookmark> _feedRepository;
 
-        public Bookmarkss(TcDbcontext book, IMapper mapper, IWebHostEnvironment environment, IConfiguration config)
+        public Bookmarkss(TcDbcontext book, IMapper mapper, IWebHostEnvironment environment, IConfiguration config, IGenericRepository<Bookmark> feedRepository)
         {
             _book = book;
             _mapper = mapper;
             _environment = environment;
             _config = config;
+            _feedRepository = feedRepository;
         }
         //Connection string for sql for whole class
         private SqlConnection CreateConnection()
@@ -49,11 +53,9 @@ namespace TClone.Services
             return info.ToList();
         }
         //Delete Single Bookmark
-        public async Task<string> DeletSBookmark(int id)
+        public async Task<string> DeletSBookmark(object BookmarkId)
         {
-            var dbook = await _book.Bookmarks.FindAsync(id);
-             _book.Bookmarks.Remove(dbook);
-            await _book.SaveChangesAsync();
+            await _feedRepository.Delete(BookmarkId);
             var resultMessage = new { message = "  Bookmark Removed !!" };
             return (JsonConvert.SerializeObject(resultMessage));
         }

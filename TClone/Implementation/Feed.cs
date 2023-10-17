@@ -5,22 +5,29 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using TClone.Data;
 using TClone.Models;
+using TClone.RepoImplementation;
+using TClone.Repository;
 
 namespace TClone.Services
 {
-    public class Feed : IFeed
+    public class Feed : GenericRepository<Posts>, IFeed
     {
         private readonly TcDbcontext _feed;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _config;
+        private readonly IGenericRepository<Posts> _feedRepository;
+        private readonly IGenericRepository<Follow> _followRepository;
 
-        public Feed(TcDbcontext feed, IMapper mapper, IWebHostEnvironment environment,IConfiguration config)
+        public Feed(TcDbcontext feed, IMapper mapper, IWebHostEnvironment environment,IConfiguration config, IGenericRepository<Posts> feedRepository,
+           IGenericRepository<Follow> followRepository) : base(feed)
         {
             _feed = feed;
             _mapper = mapper;
             _environment = environment;
             _config = config;
+            _feedRepository = feedRepository;
+            _followRepository = followRepository;
         }
 
         //Connection string for sql for whole class
@@ -28,11 +35,13 @@ namespace TClone.Services
         {
             return new SqlConnection(_config.GetConnectionString("conn"));
         }
+
+        //Post using repo pattern
         public async Task<string> Post(Posts req)
         {
-            var addp = await _feed.Posts.AddAsync(req);
-            await _feed.SaveChangesAsync();
-            return "Post Added";
+            await _feedRepository.Add(req);
+            var resultMessage = new { message = "User Unfollowed!!" };
+            return (JsonConvert.SerializeObject(resultMessage));
         }
         //get all post for home
         public async Task <List<PostDto>> Get (string id )
@@ -127,13 +136,11 @@ namespace TClone.Services
         }
 
         // UnFollow
-        public async Task<string>Unfollow(int id)
+        public async Task<string>Unfollow(object FollowId)
         {
-            var unfollow = await _feed.Follows.FindAsync(id);
-            _feed.Follows.Remove(unfollow);
-            await _feed.SaveChangesAsync();
-            var response = new { Message = "Deleted" };
-            var resultMessage = new { message = "User Already Exist !!" };
+            await _followRepository.Delete(FollowId);
+            
+            var resultMessage = new { message = "User Unfollowed!!" };
             return (JsonConvert.SerializeObject(resultMessage));
         }
         //Get Post for profile
@@ -246,16 +253,26 @@ namespace TClone.Services
         }
 
         //Delete Post
-        public async Task<string>DeletePost(int id)
-        {
-            using var connection = CreateConnection();
-            var sqlQuery = @"delete from posts
-                             where postId = @id ";
-            var parameter = new { id = id };
-            var info = await connection.QueryFirstOrDefaultAsync<Posts>(sqlQuery, parameter);
-            var resultMessage = new { message = "Post Deleted " };
-            return (JsonConvert.SerializeObject(resultMessage));
+        //public async Task<string>DeletePost(int id)
+        //{
+        //    using var connection = CreateConnection();
+        //    var sqlQuery = @"delete from posts
+        //                     where postId = @id ";
+        //    var parameter = new { id = id };
+        //    var info = await connection.QueryFirstOrDefaultAsync<Posts>(sqlQuery, parameter);
+        //    var resultMessage = new { message = "Post Deleted " };
+        //    return (JsonConvert.SerializeObject(resultMessage));
 
+        //}
+
+        public async Task<string> Delete(object PostId)
+        {
+            await _feedRepository.Delete(PostId);
+            return "deleted";
         }
+
+
+
+
     }
 }

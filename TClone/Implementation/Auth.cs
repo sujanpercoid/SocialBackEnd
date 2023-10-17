@@ -8,16 +8,17 @@ using System.Security.Cryptography;
 using System.Text;
 using TClone.Data;
 using TClone.Models;
+using TClone.RepoImplementation;
 
 namespace TClone.Services
 {
-    public class Auth : IAuth
+    public class Auth : GenericRepository<User>, IAuth
     {
         private readonly TcDbcontext _login;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
 
-        public Auth(TcDbcontext login, IMapper mapper, IWebHostEnvironment environment)
+        public Auth(TcDbcontext login, IMapper mapper, IWebHostEnvironment environment) : base(login)
         {
             _login = login;
             _mapper = mapper;
