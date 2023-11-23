@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using TClone.Models;
+using Dto;
+using Models;
 
 namespace TClone.AutoMapper
 {

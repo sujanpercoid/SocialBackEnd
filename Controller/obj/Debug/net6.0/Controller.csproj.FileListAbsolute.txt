@@ -1,0 +1,5 @@
+D:\sujan\new plular projects\TClone\Controller\obj\Debug\net6.0\Controller.csproj.AssemblyReference.cache
+D:\sujan\new plular projects\TClone\Controller\obj\Debug\net6.0\Controller.GeneratedMSBuildEditorConfig.editorconfig
+D:\sujan\new plular projects\TClone\Controller\obj\Debug\net6.0\Controller.AssemblyInfoInputs.cache
+D:\sujan\new plular projects\TClone\Controller\obj\Debug\net6.0\Controller.AssemblyInfo.cs
+D:\sujan\new plular projects\TClone\Controller\obj\Debug\net6.0\Controller.csproj.CoreCompileInputs.cache

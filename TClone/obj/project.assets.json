@@ -644,6 +644,15 @@
           }
         }
       },
+      "Sqids/3.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Sqids.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Sqids.dll": {}
+        }
+      },
       "Swashbuckle.AspNetCore/6.2.3": {
         "type": "package",
         "dependencies": {
@@ -1063,6 +1072,64 @@
             "assetType": "runtime",
             "rid": "win"
           }
+        }
+      },
+      "Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.11",
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Data.dll": {}
+        }
+      },
+      "Dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Dto.dll": {}
+        }
+      },
+      "Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Models.dll": {}
+        }
+      },
+      "RepoImplementation/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Data": "1.0.0",
+          "Repository": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/RepoImplementation.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RepoImplementation.dll": {}
+        }
+      },
+      "Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Repository.dll": {}
         }
       }
     }
@@ -2224,6 +2291,25 @@
         "version.txt"
       ]
     },
+    "Sqids/3.0.3": {
+      "sha512": "27ndSnPhm5gSYrTqShxuBzfKhCMopk8YCIGHR2VL/BNSPmlwEQCxJnodQIIv/h1jhIm6FIye/Q7T42RdIEQaXA==",
+      "type": "package",
+      "path": "sqids/3.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net6.0/Sqids.dll",
+        "lib/net6.0/Sqids.xml",
+        "lib/net7.0/Sqids.dll",
+        "lib/net7.0/Sqids.xml",
+        "lib/netstandard2.0/Sqids.dll",
+        "lib/netstandard2.0/Sqids.xml",
+        "nuget-readme.md",
+        "sqids.3.0.3.nupkg.sha512",
+        "sqids.nuspec"
+      ]
+    },
     "Swashbuckle.AspNetCore/6.2.3": {
       "sha512": "cnzQDn0Le+hInsw2SYwlOhOCPXpYi/szcvnyqZJ12v+QyrLBwAmWXBg6RIyHB18s/mLeywC+Rg2O9ndz0IUNYQ==",
       "type": "package",
@@ -3279,16 +3365,47 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Data/1.0.0": {
+      "type": "project",
+      "path": "../Data/Data.csproj",
+      "msbuildProject": "../Data/Data.csproj"
+    },
+    "Dto/1.0.0": {
+      "type": "project",
+      "path": "../Dto/Dto.csproj",
+      "msbuildProject": "../Dto/Dto.csproj"
+    },
+    "Models/1.0.0": {
+      "type": "project",
+      "path": "../Models/Models.csproj",
+      "msbuildProject": "../Models/Models.csproj"
+    },
+    "RepoImplementation/1.0.0": {
+      "type": "project",
+      "path": "../GenericRepository/RepoImplementation.csproj",
+      "msbuildProject": "../GenericRepository/RepoImplementation.csproj"
+    },
+    "Repository/1.0.0": {
+      "type": "project",
+      "path": "../Repository/Repository.csproj",
+      "msbuildProject": "../Repository/Repository.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "Dapper >= 2.0.151",
+      "Data >= 1.0.0",
+      "Dto >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 7.0.11",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.11",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.11",
+      "Models >= 1.0.0",
       "Newtonsoft.Json >= 13.0.3",
+      "RepoImplementation >= 1.0.0",
+      "Repository >= 1.0.0",
+      "Sqids >= 3.0.3",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "System.Data.SqlClient >= 4.8.5"
     ]
@@ -3323,7 +3440,23 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\sujan\\new plular projects\\TClone\\Data\\Data.csproj": {
+              "projectPath": "D:\\sujan\\new plular projects\\TClone\\Data\\Data.csproj"
+            },
+            "D:\\sujan\\new plular projects\\TClone\\Dto\\Dto.csproj": {
+              "projectPath": "D:\\sujan\\new plular projects\\TClone\\Dto\\Dto.csproj"
+            },
+            "D:\\sujan\\new plular projects\\TClone\\GenericRepository\\RepoImplementation.csproj": {
+              "projectPath": "D:\\sujan\\new plular projects\\TClone\\GenericRepository\\RepoImplementation.csproj"
+            },
+            "D:\\sujan\\new plular projects\\TClone\\Models\\Models.csproj": {
+              "projectPath": "D:\\sujan\\new plular projects\\TClone\\Models\\Models.csproj"
+            },
+            "D:\\sujan\\new plular projects\\TClone\\Repository\\Repository.csproj": {
+              "projectPath": "D:\\sujan\\new plular projects\\TClone\\Repository\\Repository.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -3361,6 +3494,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "Sqids": {
+            "target": "Package",
+            "version": "[3.0.3, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

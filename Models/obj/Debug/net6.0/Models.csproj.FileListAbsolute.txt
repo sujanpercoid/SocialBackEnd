@@ -1,0 +1,12 @@
+D:\sujan\new plular projects\TClone\Models\bin\Debug\net6.0\Models.deps.json
+D:\sujan\new plular projects\TClone\Models\bin\Debug\net6.0\Models.dll
+D:\sujan\new plular projects\TClone\Models\bin\Debug\net6.0\Models.pdb
+D:\sujan\new plular projects\TClone\Models\obj\Debug\net6.0\Models.csproj.AssemblyReference.cache
+D:\sujan\new plular projects\TClone\Models\obj\Debug\net6.0\Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\sujan\new plular projects\TClone\Models\obj\Debug\net6.0\Models.AssemblyInfoInputs.cache
+D:\sujan\new plular projects\TClone\Models\obj\Debug\net6.0\Models.AssemblyInfo.cs
+D:\sujan\new plular projects\TClone\Models\obj\Debug\net6.0\Models.csproj.CoreCompileInputs.cache
+D:\sujan\new plular projects\TClone\Models\obj\Debug\net6.0\Models.dll
+D:\sujan\new plular projects\TClone\Models\obj\Debug\net6.0\refint\Models.dll
+D:\sujan\new plular projects\TClone\Models\obj\Debug\net6.0\Models.pdb
+D:\sujan\new plular projects\TClone\Models\obj\Debug\net6.0\ref\Models.dll

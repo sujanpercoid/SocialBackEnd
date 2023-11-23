@@ -1,7 +1,7 @@
+using Data;
 using Microsoft.EntityFrameworkCore;
-using TClone.Data;
+
 using TClone.Implementation;
-using TClone.Models;
 using TClone.RepoImplementation;
 using TClone.Repository;
 using TClone.Services;

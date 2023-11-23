@@ -42,6 +42,30 @@ namespace TClone.Migrations
                     b.ToTable("Bookmarks");
                 });
 
+            modelBuilder.Entity("TClone.Models.Comment", b =>
+                {
+                    b.Property<int>("CmttId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CmttId"));
+
+                    b.Property<string>("Cmt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CmttId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("TClone.Models.Follow", b =>
                 {
                     b.Property<int>("FollowId")
